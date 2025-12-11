@@ -1,19 +1,18 @@
 import { Picker } from "@react-native-picker/picker";
 import React, { useState } from "react";
 import { Button, StyleSheet, TextInput, View } from "react-native";
+import { useActivities } from "../context/ActivityContext";
+import { Activity } from "../types/Activity";
 
-interface Props {
-  onAdd: (title: string, type: string, duration: string) => void;
-}
-
-export const ActivityForm: React.FC<Props> = ({ onAdd }) => {
+export const ActivityForm: React.FC = () => {
+  const { addActivity } = useActivities();
   const [title, setTitle] = useState("");
-  const [type, setType] = useState<"course" | "velo" | "natation">("course");
+  const [type, setType] = useState<Activity["type"]>("course");
   const [duration, setDuration] = useState("");
 
   const handlePress = () => {
     if (!title || !duration) return;
-    onAdd(title, type, duration);
+    addActivity(title, type, duration);
     setTitle("");
     setDuration("");
   };

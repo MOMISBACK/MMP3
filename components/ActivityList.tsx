@@ -1,19 +1,22 @@
 import React from "react";
-import { FlatList } from "react-native";
-import { Activity } from "../types/Activity";
+import { FlatList, Text } from "react-native";
+import { useActivities } from "../context/ActivityContext";
 import { ActivityItem } from "./ActivityItem";
 
-interface Props {
-  activities: Activity[];
-  onDelete: (id: string) => void;
-}
+export const ActivityList: React.FC = () => {
+  const { activities, removeActivity, loading } = useActivities();
 
-export const ActivityList: React.FC<Props> = ({ activities, onDelete }) => (
-  <FlatList
-    data={activities}
-    keyExtractor={(item) => item.id}
-    renderItem={({ item }) => (
-      <ActivityItem activity={item} onDelete={onDelete} />
-    )}
-  />
-);
+  if (loading) {
+    return <Text>Chargement des activités...</Text>;
+  }
+
+  return (
+    <FlatList
+      data={activities}
+      keyExtractor={(item) => item.id}
+      renderItem={({ item }) => (
+        <ActivityItem activity={item} onDelete={removeActivity} />
+      )}
+    />
+  );
+};

@@ -1,0 +1,21 @@
+Starting project at /app
+React Compiler enabled
+Starting Metro Bundler
+The following packages should be updated for best compatibility with the installed expo version:
+  @react-native-picker/picker@2.11.4 - expected version: 2.11.1
+Your project may not work correctly until you install the expected versions of the packages.
+Waiting on http://localhost:8081
+Logs for your project will appear below.
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web Bundled 2535ms node_modules/expo-router/entry.js (766 modules)
+λ Bundled 2807ms node_modules/expo-router/node/render.js (929 modules)
+λ  WARN  props.pointerEvents is deprecated. Use style.pointerEvents
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓░░░░░░░░ 55.4% (390/524)
+Web Bundled 6447ms node_modules/expo-router/entry.js (767 modules)
+ LOG  [web] Logs will appear in the browser console
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+λ Bundled 45ms node_modules/expo-router/node/render.js (1 module)
+λ  WARN  props.pointerEvents is deprecated. Use style.pointerEvents
+Web Bundled 335ms node_modules/expo-router/entry.js (1 module)
+Web Bundled 52ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console

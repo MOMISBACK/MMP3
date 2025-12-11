@@ -2,14 +2,18 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { ActivityForm } from "../components/ActivityForm";
 import { ActivityList } from "../components/ActivityList";
-import { useActivities } from "../hooks/useActivities";
+import { useActivities } from "../context/ActivityContext";
+import { useAuth } from "../context/AuthContext";
 
 export default function HomeScreen() {
   const { activities, addActivity, removeActivity } = useActivities();
+  const { user } = useAuth();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Mes Activités Sportives</Text>
+      <Text style={styles.header}>
+        Activités de {user ? user.name : "..."}
+      </Text>
       <ActivityForm onAdd={addActivity} />
       <ActivityList activities={activities} onDelete={removeActivity} />
     </View>

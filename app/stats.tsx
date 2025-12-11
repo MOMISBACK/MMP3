@@ -1,53 +1,57 @@
 import { Picker } from "@react-native-picker/picker";
 import React, { useMemo, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { useActivities } from "../hooks/useActivities";
+import { useActivities } from "../context/ActivityContext";
 import { Activity } from "../types/Activity";
 
 type Period = "semaine" | "mois" | "annee";
 
 export default function StatsScreen() {
-  const { activities } = useActivities();
+  const { activities, loading } = useActivities();
   const [period, setPeriod] = useState<Period>("semaine");
 
-  // Sécurité : si aucune donnée, on renvoie des stats vides
-  const safeActivities: Activity[] = Array.isArray(activities) ? activities : [];
-
-  const filtered = useMemo(() => {
-    if (safeActivities.length === 0) return [];
-
+  const filteredActivities = useMemo(() => {
+    if (!activities) return [];
     const now = new Date();
+    const oneWeekAgo = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7);
 
-    return safeActivities.filter((act) => {
-      if (!act.date) return false; // sécurité
-      const d = new Date(act.date);
-      if (isNaN(d.getTime())) return false;
+    return activities.filter((activity) => {
+      const activityDate = new Date(activity.date);
+      if (isNaN(activityDate.getTime())) return false;
 
-      if (period === "semaine") {
-        const diffDays = (now.getTime() - d.getTime()) / (1000 * 60 * 60 * 24);
-        return diffDays < 7;
+      switch (period) {
+        case "semaine":
+          return activityDate >= oneWeekAgo;
+        case "mois":
+          return (
+            activityDate.getMonth() === now.getMonth() &&
+            activityDate.getFullYear() === now.getFullYear()
+          );
+        case "annee":
+          return activityDate.getFullYear() === now.getFullYear();
+        default:
+          return true;
       }
-      if (period === "mois") {
-        return (
-          d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear()
-        );
-      }
-      if (period === "annee") {
-        return d.getFullYear() === now.getFullYear();
-      }
-      return false;
     });
-  }, [period, safeActivities]);
+  }, [activities, period]);
 
   const stats = useMemo(() => {
-    const totals = { course: 0, velo: 0, natation: 0 };
-    filtered.forEach((a) => {
+    const totals: Record<Activity["type"], number> = {
+      course: 0,
+      velo: 0,
+      natation: 0,
+    };
+    filteredActivities.forEach((a) => {
       if (a.type in totals) {
-        totals[a.type as keyof typeof totals] += a.duration || 0;
+        totals[a.type] += a.duration || 0;
       }
     });
     return totals;
-  }, [filtered]);
+  }, [filteredActivities]);
+
+  if (loading) {
+    return <Text>Chargement des statistiques...</Text>;
+  }
 
   return (
     <View style={styles.container}>
@@ -66,7 +70,7 @@ export default function StatsScreen() {
         </Picker>
       </View>
 
-      {safeActivities.length === 0 ? (
+      {activities.length === 0 ? (
         <View style={styles.emptyBox}>
           <Text style={styles.emptyText}>
             Aucune activité enregistrée pour le moment 💤

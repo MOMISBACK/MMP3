@@ -7,15 +7,9 @@ Your project may not work correctly until you install the expected versions of t
 Waiting on http://localhost:8081
 Logs for your project will appear below.
 Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
-Web Bundled 2535ms node_modules/expo-router/entry.js (766 modules)
-λ Bundled 2807ms node_modules/expo-router/node/render.js (929 modules)
+λ Bundled 2012ms node_modules/expo-router/node/render.js (988 modules)
 λ  WARN  props.pointerEvents is deprecated. Use style.pointerEvents
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓░░░░░░░░ 55.4% (390/524)
-Web Bundled 6447ms node_modules/expo-router/entry.js (767 modules)
- LOG  [web] Logs will appear in the browser console
-Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
-λ Bundled 45ms node_modules/expo-router/node/render.js (1 module)
-λ  WARN  props.pointerEvents is deprecated. Use style.pointerEvents
-Web Bundled 335ms node_modules/expo-router/entry.js (1 module)
-Web Bundled 52ms node_modules/expo-router/entry.js (1 module)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 99.9% (856/856)
+Web Bundled 4062ms node_modules/expo-router/entry.js (856 modules)
+Web Bundled 2182ms node_modules/expo-router/entry.js (857 modules)
  LOG  [web] Logs will appear in the browser console

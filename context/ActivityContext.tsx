@@ -4,7 +4,13 @@ import { activityService } from "../services/activityService";
 
 interface ActivityContextType {
   activities: Activity[];
-  addActivity: (title: string, type: string, duration: string) => void;
+  addActivity: (
+    title: string,
+    type: Activity["type"],
+    duration: string,
+    distance?: string,
+    calories?: string,
+  ) => void;
   removeActivity: (id: string) => void;
   loading: boolean;
 }
@@ -34,8 +40,10 @@ export function ActivityProvider({ children }: { children: React.ReactNode }) {
 
   const addActivity = async (
     title: string,
-    type: string,
+    type: Activity["type"],
     duration: string,
+    distance?: string,
+    calories?: string,
   ) => {
     if (!title || !type || !duration) return;
 
@@ -44,6 +52,8 @@ export function ActivityProvider({ children }: { children: React.ReactNode }) {
       title,
       type,
       duration: Number(duration),
+      distance: distance ? Number(distance) : undefined,
+      calories: calories ? Number(calories) : undefined,
       date: new Date().toISOString(),
     };
 

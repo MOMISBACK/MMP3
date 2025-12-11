@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { ActivityForm } from "../components/ActivityForm";
-import { ActivityList } from "../components/ActivityList";
-import { useActivities } from "../context/ActivityContext";
-import { useAuth } from "../context/AuthContext";
+import { ActivityForm } from "../../components/ActivityForm";
+import { ActivityList } from "../../components/ActivityList";
+import { useActivities } from "../../context/ActivityContext";
+import { useAuth } from "../../context/AuthContext";
 
 export default function HomeScreen() {
   const { activities, addActivity, removeActivity } = useActivities();

@@ -6,7 +6,7 @@ interface ActivityContextType {
   activities: Activity[];
   addActivity: (
     title: string,
-    type: string,
+    type: Activity["type"],
     duration: string,
     distance?: string,
     calories?: string,

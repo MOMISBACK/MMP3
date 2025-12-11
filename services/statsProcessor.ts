@@ -22,9 +22,9 @@ export const statsProcessor = {
       totalDistance: 0,
       totalCalories: 0,
       longestActivity: undefined as Activity | undefined,
-      durationByType: { course: 0, velo: 0, natation: 0 },
-      distanceByType: { course: 0, velo: 0, natation: 0 },
-      caloriesByType: { course: 0, velo: 0, natation: 0 },
+      durationByType: { course: 0, velo: 0, natation: 0, marche: 0 },
+      distanceByType: { course: 0, velo: 0, natation: 0, marche: 0 },
+      caloriesByType: { course: 0, velo: 0, natation: 0, marche: 0 },
     };
 
     if (!activities || activities.length === 0) {

@@ -38,6 +38,7 @@ export const ActivityForm: React.FC = () => {
         <Picker.Item label="Course à pied" value="course" />
         <Picker.Item label="Vélo" value="velo" />
         <Picker.Item label="Natation" value="natation" />
+        <Picker.Item label="Marche" value="marche" />
       </Picker>
 
       <TextInput

@@ -49,6 +49,7 @@ export default function StatsScreen() {
       course: 0,
       velo: 0,
       natation: 0,
+      marche: 0,
     };
     filteredActivities.forEach((a) => {
       if (a.type in totals) {
@@ -90,6 +91,7 @@ export default function StatsScreen() {
           <Text>🏃 Course à pied : {stats.course} min</Text>
           <Text>🚴 Vélo : {stats.velo} min</Text>
           <Text>🏊 Natation : {stats.natation} min</Text>
+          <Text>🚶 Marche : {stats.marche} min</Text>
         </View>
       )}
     </View>

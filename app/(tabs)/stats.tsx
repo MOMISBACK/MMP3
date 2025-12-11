@@ -1,8 +1,8 @@
 import { Picker } from "@react-native-picker/picker";
 import React, { useMemo, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { useActivities } from "../context/ActivityContext";
-import { Activity } from "../types/Activity";
+import { useActivities } from "../../context/ActivityContext";
+import { Activity } from "../../types/Activity";
 
 type Period = "semaine" | "mois" | "annee";
 
@@ -12,23 +12,32 @@ export default function StatsScreen() {
 
   const filteredActivities = useMemo(() => {
     if (!activities) return [];
+
     const now = new Date();
-    const oneWeekAgo = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7);
+    // Normalize `now` to the start of the day for consistent comparisons
+    now.setHours(0, 0, 0, 0);
 
     return activities.filter((activity) => {
       const activityDate = new Date(activity.date);
       if (isNaN(activityDate.getTime())) return false;
+      // Normalize `activityDate` to the start of the day
+      activityDate.setHours(0, 0, 0, 0);
 
       switch (period) {
-        case "semaine":
+        case "semaine": {
+          const oneWeekAgo = new Date(now);
+          oneWeekAgo.setDate(now.getDate() - 7);
           return activityDate >= oneWeekAgo;
-        case "mois":
+        }
+        case "mois": {
           return (
             activityDate.getMonth() === now.getMonth() &&
             activityDate.getFullYear() === now.getFullYear()
           );
-        case "annee":
+        }
+        case "annee": {
           return activityDate.getFullYear() === now.getFullYear();
+        }
         default:
           return true;
       }

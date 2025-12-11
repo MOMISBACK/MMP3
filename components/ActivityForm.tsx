@@ -9,12 +9,16 @@ export const ActivityForm: React.FC = () => {
   const [title, setTitle] = useState("");
   const [type, setType] = useState<Activity["type"]>("course");
   const [duration, setDuration] = useState("");
+  const [distance, setDistance] = useState("");
+  const [calories, setCalories] = useState("");
 
   const handlePress = () => {
     if (!title || !duration) return;
-    addActivity(title, type, duration);
+    addActivity(title, type, duration, distance, calories);
     setTitle("");
     setDuration("");
+    setDistance("");
+    setCalories("");
   };
 
   return (
@@ -26,7 +30,6 @@ export const ActivityForm: React.FC = () => {
         onChangeText={setTitle}
       />
 
-      {/* Liste déroulante */}
       <Picker
         selectedValue={type}
         onValueChange={(value) => setType(value as any)}
@@ -43,6 +46,20 @@ export const ActivityForm: React.FC = () => {
         keyboardType="numeric"
         value={duration}
         onChangeText={setDuration}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Distance (km)"
+        keyboardType="numeric"
+        value={distance}
+        onChangeText={setDistance}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Calories"
+        keyboardType="numeric"
+        value={calories}
+        onChangeText={setCalories}
       />
       <Button title="Ajouter" onPress={handlePress} />
     </View>

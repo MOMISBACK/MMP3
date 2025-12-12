@@ -10,43 +10,56 @@ Your project may not work correctly until you install the expected versions of t
 Waiting on http://localhost:8081
 Logs for your project will appear below.
 Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓░░░░░░░░░░░ 36.0% ( 38/170)
-λ node_modules/expo-router/node/render.js ▓░░░░░░░░░░░░░░░  8.0% ( 48/206)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓░░░░░░░░░░░ 36.0% (162/320)
-λ node_modules/expo-router/node/render.js ▓▓▓▓░░░░░░░░░░░░ 27.7% (202/384)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓░░░░░░░░░░ 42.8% (335/512)
-λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓░░░░░░ 65.3% (454/562)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓░░░░░░░ 61.7% (501/638)
-λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓░░░░░ 70.3% (549/655)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 90.1% (824/877)
-λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓░░░ 87.3% (818/899)
-Web Bundled 19944ms node_modules/expo-router/entry.js (908 modules)
-λ Bundled 20180ms node_modules/expo-router/node/render.js (1130 modules)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓░░░░░░░ 58.4% (451/614)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 95.6% (872/892)
-Web Bundled 7238ms node_modules/expo-router/entry.js (911 modules)
-Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
-λ Bundled 50ms node_modules/expo-router/node/render.js (1 module)
-Web Bundled 587ms node_modules/expo-router/entry.js (1 module)
-Web Bundled 107ms node_modules/expo-router/entry.js (1 module)
+Web Bundling failed 2954ms node_modules/expo-router/entry.js (840 modules)
+
+Metro error: SyntaxError: /app/app/(tabs)/index.tsx: Identifier 'React' has already been declared. (2:7)
+
+[0m [90m 1 |[39m [36mimport[39m [33mReact[39m [36mfrom[39m [32m"react"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m [33mReact[39m [36mfrom[39m [32m"react"[39m[33m;[39m
+ [90m   |[39m        [31m[1m^[22m[39m
+ [90m 3 |[39m [36mimport[39m { [33mStyleSheet[39m[33m,[39m [33mText[39m[33m,[39m [33mView[39m[33m,[39m [33mButton[39m } [36mfrom[39m [32m"react-native"[39m[33m;[39m
+ [90m 4 |[39m [36mimport[39m { [33mActivityForm[39m } [36mfrom[39m [32m"../../components/ActivityForm"[39m[33m;[39m
+ [90m 5 |[39m [36mimport[39m { [33mActivityList[39m } [36mfrom[39m [32m"../../components/ActivityList"[39m[33m;[39m[0m
+
+Call Stack
+  <unknown> (app/(tabs)/index.tsx:2:8)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 96.7% (1064/1082)
+λ Bundling failed 3041ms node_modules/expo-router/node/render.js (1125 modules)
+Web node_modules/expo-router/_error.js ▓▓▓▓▓▓▓▓▓▓▓▓░░░░ 77.0% (186/212)
+Web Bundled 6255ms node_modules/expo-router/_error.js (323 modules)
  LOG  [web] Logs will appear in the browser console
 Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
-λ Bundled 43ms node_modules/expo-router/node/render.js (1 module)
-Web Bundled 452ms node_modules/expo-router/entry.js (1 module)
-Web Bundled 39ms node_modules/expo-router/entry.js (1 module)
+Web Bundling failed 1552ms node_modules/expo-router/entry.js (839 modules)
+
+Metro error: SyntaxError: /app/app/(tabs)/index.tsx: Identifier 'React' has already been declared. (2:7)
+
+[0m [90m 1 |[39m [36mimport[39m [33mReact[39m [36mfrom[39m [32m"react"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m [33mReact[39m [36mfrom[39m [32m"react"[39m[33m;[39m
+ [90m   |[39m        [31m[1m^[22m[39m
+ [90m 3 |[39m [36mimport[39m { [33mStyleSheet[39m[33m,[39m [33mText[39m[33m,[39m [33mView[39m[33m,[39m [33mButton[39m } [36mfrom[39m [32m"react-native"[39m[33m;[39m
+ [90m 4 |[39m [36mimport[39m { [33mActivityForm[39m } [36mfrom[39m [32m"../../components/ActivityForm"[39m[33m;[39m
+ [90m 5 |[39m [36mimport[39m { [33mActivityList[39m } [36mfrom[39m [32m"../../components/ActivityList"[39m[33m;[39m[0m
+
+Call Stack
+  <unknown> (app/(tabs)/index.tsx:2:8)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 91.4% (1027/1074)
+λ Bundling failed 1600ms node_modules/expo-router/node/render.js (1074 modules)
+Web Bundled 57ms node_modules/expo-router/_error.js (1 module)
  LOG  [web] Logs will appear in the browser console
 Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
-λ Bundled 43ms node_modules/expo-router/node/render.js (1 module)
-Web Bundled 427ms node_modules/expo-router/entry.js (1 module)
-Web Bundled 39ms node_modules/expo-router/entry.js (1 module)
- LOG  [web] Logs will appear in the browser console
-Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
-λ Bundled 31ms node_modules/expo-router/node/render.js (1 module)
-Web Bundled 372ms node_modules/expo-router/entry.js (1 module)
-Web Bundled 48ms node_modules/expo-router/entry.js (1 module)
- LOG  [web] Logs will appear in the browser console
-Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
-λ Bundled 45ms node_modules/expo-router/node/render.js (1 module)
-Web Bundled 450ms node_modules/expo-router/entry.js (1 module)
-Web Bundled 37ms node_modules/expo-router/entry.js (1 module)
+Web Bundling failed 1158ms node_modules/expo-router/entry.js (690 modules)
+
+Metro error: SyntaxError: /app/app/(tabs)/index.tsx: Identifier 'React' has already been declared. (2:7)
+
+[0m [90m 1 |[39m [36mimport[39m [33mReact[39m [36mfrom[39m [32m"react"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m [33mReact[39m [36mfrom[39m [32m"react"[39m[33m;[39m
+ [90m   |[39m        [31m[1m^[22m[39m
+ [90m 3 |[39m [36mimport[39m { [33mStyleSheet[39m[33m,[39m [33mText[39m[33m,[39m [33mView[39m[33m,[39m [33mButton[39m } [36mfrom[39m [32m"react-native"[39m[33m;[39m
+ [90m 4 |[39m [36mimport[39m { [33mActivityForm[39m } [36mfrom[39m [32m"../../components/ActivityForm"[39m[33m;[39m
+ [90m 5 |[39m [36mimport[39m { [33mActivityList[39m } [36mfrom[39m [32m"../../components/ActivityList"[39m[33m;[39m[0m
+
+Call Stack
+  <unknown> (app/(tabs)/index.tsx:2:8)
+λ Bundling failed 1183ms node_modules/expo-router/node/render.js (1074 modules)
+Web Bundled 18ms node_modules/expo-router/_error.js (1 module)
  LOG  [web] Logs will appear in the browser console

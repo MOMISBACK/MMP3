@@ -1,5 +1,6 @@
+
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { ActivityForm } from "../../components/ActivityForm";
 import { ActivityList } from "../../components/ActivityList";
 import { useActivities } from "../../context/ActivityContext";
@@ -15,7 +16,9 @@ export default function HomeScreen() {
         <Text style={styles.header} numberOfLines={1} ellipsizeMode="tail">
           Activités de {user ? user.email.split('@')[0] : "..."}
         </Text>
-        <Button title="Déconnexion" onPress={logout} />
+        <TouchableOpacity onPress={logout} style={styles.logoutButton}>
+          <Text style={styles.logoutButtonText}>Déconnexion</Text>
+        </TouchableOpacity>
       </View>
       <ActivityForm onAdd={addActivity} />
       <ActivityList activities={activities} onDelete={removeActivity} />
@@ -24,17 +27,33 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff", padding: 20, paddingTop: 60 },
+  container: {
+    flex: 1,
+    backgroundColor: "#111",
+    padding: 20,
+  },
   headerContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 20,
+    marginTop: 40,
   },
   header: {
     fontSize: 22,
     fontWeight: "bold",
+    color: "#fff",
     flex: 1,
     marginRight: 10,
   },
+  logoutButton: {
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+    backgroundColor: '#333',
+    borderRadius: 8,
+  },
+  logoutButtonText: {
+    color: '#ffd700',
+    fontWeight: 'bold',
+  }
 });

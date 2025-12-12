@@ -10,20 +10,16 @@ Your project may not work correctly until you install the expected versions of t
 Waiting on http://localhost:8081
 Logs for your project will appear below.
 Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 89.1% (706/787)
-λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 90.9% (694/794)
-λ Bundled 4469ms node_modules/expo-router/node/render.js (1130 modules)
-Web Bundled 6039ms node_modules/expo-router/entry.js (909 modules)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓░░░ 86.1% (696/750)
-Web Bundled 1179ms node_modules/expo-router/entry.js (911 modules)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓░░░░ 76.7% (536/612)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓░░░░ 80.0% (535/598)
+λ Bundled 6654ms node_modules/expo-router/node/render.js (1129 modules)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 99.8% (908/909)
+Web Bundled 8894ms node_modules/expo-router/entry.js (909 modules)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓░░░░░░░ 59.3% (416/540)
+Web Bundled 1996ms node_modules/expo-router/entry.js (880 modules)
  LOG  [web] Logs will appear in the browser console
 Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
-λ Bundled 54ms node_modules/expo-router/node/render.js (1 module)
-Web Bundled 432ms node_modules/expo-router/entry.js (1 module)
-Web Bundled 39ms node_modules/expo-router/entry.js (1 module)
- LOG  [web] Logs will appear in the browser console
-Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
-λ Bundled 81ms node_modules/expo-router/node/render.js (1 module)
-Web Bundled 690ms node_modules/expo-router/entry.js (1 module)
-Web Bundled 129ms node_modules/expo-router/entry.js (1 module)
+λ Bundled 63ms node_modules/expo-router/node/render.js (1 module)
+Web Bundled 509ms node_modules/expo-router/entry.js (1 module)
+Web Bundled 45ms node_modules/expo-router/entry.js (1 module)
  LOG  [web] Logs will appear in the browser console

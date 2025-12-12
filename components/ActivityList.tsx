@@ -22,7 +22,7 @@ export const ActivityList: React.FC<ActivityListProps> = ({ activities, onDelete
     <FlatList
       data={activities}
       renderItem={({ item }) => <ActivityItem activity={item} onDelete={onDelete} />}
-      keyExtractor={item => item.id}
+      keyExtractor={(item, index) => item._id || item.id || index.toString()}
     />
   );
 };

@@ -1,24 +1,41 @@
+import api from "./api";
 import { Activity } from "../types/Activity";
-import { loadData, saveData } from "../utils/storage";
-
-const ACTIVITIES_KEY = "activities";
 
 export const activityService = {
-  getActivities: async (): Promise<Activity[]> => {
+  getActivities: async (token: string): Promise<Activity[]> => {
     try {
-      const activities = await loadData<Activity>(ACTIVITIES_KEY);
-      return activities || [];
+      const response = await api.get("/activities", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return response.data;
     } catch (error) {
       console.error("Failed to get activities", error);
       throw error;
     }
   },
 
-  saveActivities: async (activities: Activity[]): Promise<void> => {
+  addActivity: async (
+    activityData: Omit<Activity, "id" | "date">,
+    token: string,
+  ): Promise<Activity> => {
     try {
-      await saveData(ACTIVITIES_KEY, activities);
+      const response = await api.post("/activities", activityData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return response.data;
     } catch (error) {
-      console.error("Failed to save activities", error);
+      console.error("Failed to save activity", error);
+      throw error;
+    }
+  },
+
+  deleteActivity: async (id: string, token: string): Promise<void> => {
+    try {
+      await api.delete(`/activities/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+    } catch (error) {
+      console.error("Failed to delete activity", error);
       throw error;
     }
   },

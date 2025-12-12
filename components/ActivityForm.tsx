@@ -1,34 +1,39 @@
+import React, { useState } from "react";
+import {
+  View,
+  TextInput,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  Platform,
+} from "react-native";
+import { Picker } from "@react-native-picker/picker";
+import { Activity } from "../types/Activity";
+import { useActivities } from "../context/ActivityContext";
 
-import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
-import { Activity } from '../../types/Activity';
+export const ActivityForm = () => {
+  const { addActivity } = useActivities();
+  const [title, setTitle] = useState("");
+  const [type, setType] = useState<Activity["type"]>("course");
+  const [duration, setDuration] = useState("");
+  const [distance, setDistance] = useState("");
+  const [calories, setCalories] = useState("");
 
-interface ActivityFormProps {
-  onAdd: (activity: Omit<Activity, 'id' | 'date'>) => void;
-}
-
-export const ActivityForm: React.FC<ActivityFormProps> = ({ onAdd }) => {
-  const [title, setTitle] = useState('');
-  const [type, setType] = useState<Activity['type']>('course');
-  const [duration, setDuration] = useState('');
-  const [distance, setDistance] = useState('');
-  const [calories, setCalories] = useState('');
-
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!title || !duration) return;
-    onAdd({
-      title,
-      type,
-      duration: parseInt(duration, 10),
-      distance: distance ? parseFloat(distance) : undefined,
-      calories: calories ? parseInt(calories, 10) : undefined,
-    });
-    setTitle('');
-    setType('course');
-    setDuration('');
-    setDistance('');
-    setCalories('');
+
+    try {
+      await addActivity(title, type, duration, distance, calories);
+      // Reset form fields after successful submission
+      setTitle("");
+      setType("course");
+      setDuration("");
+      setDistance("");
+      setCalories("");
+    } catch (error) {
+      console.error("Failed to add activity:", error);
+      // Optionally, show an error message to the user
+    }
   };
 
   return (
@@ -39,12 +44,18 @@ export const ActivityForm: React.FC<ActivityFormProps> = ({ onAdd }) => {
         placeholderTextColor="#888"
         value={title}
         onChangeText={setTitle}
+        testID="title-input"
       />
-      <View style={styles.pickerContainer}>
+      <View
+        style={[
+          styles.pickerContainer,
+          Platform.OS === "web" && styles.pickerContainerWeb,
+        ]}
+      >
         <Picker
           selectedValue={type}
           onValueChange={(itemValue) => setType(itemValue)}
-          style={styles.picker}
+          style={Platform.OS === "web" ? styles.pickerWeb : styles.picker}
           itemStyle={styles.pickerItem}
         >
           <Picker.Item label="Course à pied" value="course" />
@@ -60,6 +71,7 @@ export const ActivityForm: React.FC<ActivityFormProps> = ({ onAdd }) => {
         value={duration}
         onChangeText={setDuration}
         keyboardType="numeric"
+        testID="duration-input"
       />
       <TextInput
         style={styles.input}
@@ -68,6 +80,7 @@ export const ActivityForm: React.FC<ActivityFormProps> = ({ onAdd }) => {
         value={distance}
         onChangeText={setDistance}
         keyboardType="numeric"
+        testID="distance-input"
       />
       <TextInput
         style={styles.input}
@@ -76,8 +89,13 @@ export const ActivityForm: React.FC<ActivityFormProps> = ({ onAdd }) => {
         value={calories}
         onChangeText={setCalories}
         keyboardType="numeric"
+        testID="calories-input"
       />
-      <TouchableOpacity style={styles.buttonContainer} onPress={handleSubmit}>
+      <TouchableOpacity
+        style={styles.buttonContainer}
+        onPress={handleSubmit}
+        testID="add-activity-button"
+      >
         <Text style={styles.buttonText}>AJOUTER</Text>
       </TouchableOpacity>
     </View>
@@ -86,42 +104,58 @@ export const ActivityForm: React.FC<ActivityFormProps> = ({ onAdd }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#1e1e1e',
+    backgroundColor: "#1e1e1e",
     padding: 20,
     borderRadius: 10,
     marginBottom: 20,
+    ...Platform.select({
+      web: {
+        width: "50%",
+        alignSelf: "center",
+      },
+    }),
   },
   input: {
     height: 50,
-    backgroundColor: '#333',
+    backgroundColor: "#333",
     borderRadius: 8,
     paddingHorizontal: 16,
-    color: '#fff',
+    color: "#fff",
     marginBottom: 16,
     fontSize: 16,
   },
   pickerContainer: {
-    backgroundColor: '#333',
+    backgroundColor: "#333",
     borderRadius: 8,
     marginBottom: 16,
+    justifyContent: "center",
+  },
+  pickerContainerWeb: {
+    height: 50,
   },
   picker: {
-    color: '#fff',
+    color: "#fff",
+  },
+  pickerWeb: {
+    height: "100%",
+    backgroundColor: "transparent",
+    borderWidth: 0,
+    color: "#fff",
   },
   pickerItem: {
-    color: '#fff',
-    backgroundColor: '#333',
+    color: "#fff",
+    backgroundColor: "#333",
   },
   buttonContainer: {
-    backgroundColor: '#ffd700',
+    backgroundColor: "#ffd700",
     borderRadius: 8,
     paddingVertical: 16,
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 8,
   },
   buttonText: {
-    color: '#111',
+    color: "#111",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });

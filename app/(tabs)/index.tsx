@@ -1,14 +1,15 @@
 
-import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, TouchableOpacity, Modal } from "react-native";
 import { ActivityForm } from "../../components/ActivityForm";
 import { ActivityList } from "../../components/ActivityList";
 import { useActivities } from "../../context/ActivityContext";
 import { useAuth } from "../../context/AuthContext";
 
 export default function HomeScreen() {
-  const { activities, addActivity, removeActivity } = useActivities();
+  const { activities, removeActivity } = useActivities();
   const { user, logout } = useAuth();
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -20,8 +21,27 @@ export default function HomeScreen() {
           <Text style={styles.logoutButtonText}>Déconnexion</Text>
         </TouchableOpacity>
       </View>
-      <ActivityForm onAdd={addActivity} />
       <ActivityList activities={activities} onDelete={removeActivity} />
+      <TouchableOpacity
+        style={styles.fab}
+        onPress={() => setIsFormVisible(true)}
+      >
+        <Text style={styles.fabIcon}>+</Text>
+      </TouchableOpacity>
+      <Modal
+        visible={isFormVisible}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setIsFormVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <ActivityForm
+              onClose={() => setIsFormVisible(false)}
+            />
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -55,5 +75,33 @@ const styles = StyleSheet.create({
   logoutButtonText: {
     color: '#ffd700',
     fontWeight: 'bold',
+  },
+  fab: {
+    position: 'absolute',
+    width: 56,
+    height: 56,
+    alignItems: 'center',
+    justifyContent: 'center',
+    right: 20,
+    bottom: 20,
+    backgroundColor: '#ffd700',
+    borderRadius: 28,
+    elevation: 8,
+  },
+  fabIcon: {
+    fontSize: 24,
+    color: '#111',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+  },
+  modalContent: {
+    width: '90%',
+    backgroundColor: '#1e1e1e',
+    borderRadius: 10,
+    padding: 20,
   }
 });

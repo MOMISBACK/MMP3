@@ -31,5 +31,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 20,
   },
-  header: { fontSize: 22, fontWeight: "bold" },
+  header: {
+    fontSize: 22,
+    fontWeight: "bold",
+    flex: 1,
+    marginRight: 10,
+  },
 });

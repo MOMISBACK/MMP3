@@ -1,6 +1,7 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
+import { API_URL } from './config';
 
 // --- Type Definitions ---
 interface User {
@@ -14,9 +15,6 @@ interface AuthResponse {
   email: string;
   token: string;
 }
-
-// Define the base URL for the API
-const API_URL = 'https://server-ls5m.onrender.com/api';
 
 // Create an Axios instance
 const api = axios.create({

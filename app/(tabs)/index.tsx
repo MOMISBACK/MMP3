@@ -12,8 +12,8 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Text style={styles.header}>
-          Activités de {user ? user.email : "..."}
+        <Text style={styles.header} numberOfLines={1} ellipsizeMode="tail">
+          Activités de {user ? user.email.split('@')[0] : "..."}
         </Text>
         <Button title="Déconnexion" onPress={logout} />
       </View>

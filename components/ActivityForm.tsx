@@ -6,6 +6,7 @@ import {
   Text,
   StyleSheet,
   Platform,
+  ActivityIndicator,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { Activity } from "../types/Activity";
@@ -17,6 +18,7 @@ interface ActivityFormProps {
 
 export const ActivityForm: React.FC<ActivityFormProps> = ({ onClose }) => {
   const { addActivity } = useActivities();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [title, setTitle] = useState("");
   const [type, setType] = useState<Activity["type"]>("course");
   const [duration, setDuration] = useState("");
@@ -24,13 +26,17 @@ export const ActivityForm: React.FC<ActivityFormProps> = ({ onClose }) => {
   const [calories, setCalories] = useState("");
 
   const handleSubmit = async () => {
-    if (!title || !duration) return;
+    if (!title || !duration || isSubmitting) return;
 
+    setIsSubmitting(true);
     try {
       await addActivity(title, type, duration, distance, calories);
       onClose(); // Close the modal on success
     } catch (error) {
       console.error("Failed to add activity:", error);
+      // Error will be displayed by the context
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -93,15 +99,17 @@ export const ActivityForm: React.FC<ActivityFormProps> = ({ onClose }) => {
         <TouchableOpacity
           style={[styles.buttonContainer, styles.cancelButton]}
           onPress={onClose}
+          disabled={isSubmitting}
         >
           <Text style={[styles.buttonText, styles.cancelButtonText]}>ANNULER</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.buttonContainer}
+          style={[styles.buttonContainer, isSubmitting && styles.buttonDisabled]}
           onPress={handleSubmit}
           testID="add-activity-button"
+          disabled={isSubmitting}
         >
-          <Text style={styles.buttonText}>AJOUTER</Text>
+          {isSubmitting ? <ActivityIndicator color="#111" /> : <Text style={styles.buttonText}>AJOUTER</Text>}
         </TouchableOpacity>
       </View>
     </View>
@@ -158,6 +166,9 @@ const styles = StyleSheet.create({
   cancelButton: {
     backgroundColor: "#333",
     marginRight: 10,
+  },
+  buttonDisabled: {
+    backgroundColor: '#a5a5a5',
   },
   buttonText: {
     color: "#111",

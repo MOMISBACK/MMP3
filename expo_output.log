@@ -8,18 +8,9 @@ Your project may not work correctly until you install the expected versions of t
 Waiting on http://localhost:8081
 Logs for your project will appear below.
 Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
-λ Bundled 2216ms node_modules/expo-router/node/render.js (1130 modules)
-Web Bundled 2959ms node_modules/expo-router/entry.js (910 modules)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 88.7% (791/840)
-Web Bundled 619ms node_modules/expo-router/entry.js (840 modules)
- LOG  [web] Logs will appear in the browser console
-Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
-λ Bundled 56ms node_modules/expo-router/node/render.js (1 module)
-Web Bundled 448ms node_modules/expo-router/entry.js (1 module)
-Web Bundled 40ms node_modules/expo-router/entry.js (1 module)
- LOG  [web] Logs will appear in the browser console
-Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
-λ Bundled 61ms node_modules/expo-router/node/render.js (1 module)
-Web Bundled 485ms node_modules/expo-router/entry.js (1 module)
-Web Bundled 41ms node_modules/expo-router/entry.js (1 module)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓░░░ 86.3% (800/861)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 99.8% (1125/1126)
+λ Bundled 3631ms node_modules/expo-router/node/render.js (1129 modules)
+Web Bundled 5023ms node_modules/expo-router/entry.js (861 modules)
+Web Bundled 1078ms node_modules/expo-router/entry.js (880 modules)
  LOG  [web] Logs will appear in the browser console

@@ -1,6 +1,14 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Activity } from "../types/Activity";
 import { activityService } from "../services/activityService";
+import { useAuth } from "./AuthContext"; // Assuming useAuth provides user/token
 
 interface ActivityContextType {
   activities: Activity[];
@@ -10,8 +18,8 @@ interface ActivityContextType {
     duration: string,
     distance?: string,
     calories?: string,
-  ) => void;
-  removeActivity: (id: string) => void;
+  ) => Promise<void>;
+  removeActivity: (id: string) => Promise<void>;
   loading: boolean;
 }
 
@@ -22,21 +30,33 @@ const ActivityContext = createContext<ActivityContextType | undefined>(
 export function ActivityProvider({ children }: { children: React.ReactNode }) {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(true);
+  const { user } = useAuth(); // Get user from AuthContext
+
+  const loadActivities = useCallback(async () => {
+    setLoading(true);
+    try {
+      const token = await AsyncStorage.getItem("userToken");
+      if (token) {
+        const storedActivities = await activityService.getActivities(token);
+        setActivities(storedActivities);
+      } else {
+        setActivities([]); // Clear activities if no token
+      }
+    } catch (error) {
+      console.error("Failed to load activities", error);
+      setActivities([]);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    async function loadActivities() {
-      try {
-        const storedActivities = await activityService.getActivities();
-        setActivities(storedActivities);
-      } catch (error) {
-        console.error("Failed to load activities", error);
-        // TODO: Implement user-facing error handling (e.g., toast message)
-      } finally {
-        setLoading(false);
-      }
+    if (user) {
+      loadActivities();
+    } else {
+      setActivities([]); // Clear activities on logout
     }
-    loadActivities();
-  }, []);
+  }, [user, loadActivities]);
 
   const addActivity = async (
     title: string,
@@ -47,20 +67,20 @@ export function ActivityProvider({ children }: { children: React.ReactNode }) {
   ) => {
     if (!title || !type || !duration) return;
 
-    const newActivity: Activity = {
-      id: Date.now().toString(),
+    const newActivityData = {
       title,
       type,
       duration: Number(duration),
       distance: distance ? Number(distance) : undefined,
       calories: calories ? Number(calories) : undefined,
-      date: new Date().toISOString(),
     };
 
     try {
-      const newList = [newActivity, ...activities];
-      setActivities(newList);
-      await activityService.saveActivities(newList);
+      const token = await AsyncStorage.getItem("userToken");
+      if (!token) throw new Error("No token found");
+
+      await activityService.addActivity(newActivityData, token);
+      await loadActivities(); // Reload activities to get the latest list
     } catch (error) {
       console.error("Failed to save activity", error);
       // TODO: Implement user-facing error handling
@@ -69,9 +89,11 @@ export function ActivityProvider({ children }: { children: React.ReactNode }) {
 
   const removeActivity = async (id: string) => {
     try {
-      const newList = activities.filter((a) => a.id !== id);
-      setActivities(newList);
-      await activityService.saveActivities(newList);
+      const token = await AsyncStorage.getItem("userToken");
+      if (!token) throw new Error("No token found");
+
+      await activityService.deleteActivity(id, token);
+      await loadActivities(); // Reload activities
     } catch (error) {
       console.error("Failed to remove activity", error);
       // TODO: Implement user-facing error handling

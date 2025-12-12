@@ -3,23 +3,23 @@ React Compiler enabled
 Starting Metro Bundler
 The following packages should be updated for best compatibility with the installed expo version:
   @react-native-picker/picker@2.11.4 - expected version: 2.11.1
-  expo@54.0.27 - expected version: ~54.0.29
-  expo-constants@18.0.11 - expected version: ~18.0.12
   expo-router@6.0.17 - expected version: ~6.0.19
 Your project may not work correctly until you install the expected versions of the packages.
 Waiting on http://localhost:8081
 Logs for your project will appear below.
 Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓░░░░ 76.7% (536/612)
-λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓░░░░ 80.0% (535/598)
-λ Bundled 6654ms node_modules/expo-router/node/render.js (1129 modules)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 99.8% (908/909)
-Web Bundled 8894ms node_modules/expo-router/entry.js (909 modules)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓░░░░░░░ 59.3% (416/540)
-Web Bundled 1996ms node_modules/expo-router/entry.js (880 modules)
+λ Bundled 2216ms node_modules/expo-router/node/render.js (1130 modules)
+Web Bundled 2959ms node_modules/expo-router/entry.js (910 modules)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 88.7% (791/840)
+Web Bundled 619ms node_modules/expo-router/entry.js (840 modules)
  LOG  [web] Logs will appear in the browser console
 Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
-λ Bundled 63ms node_modules/expo-router/node/render.js (1 module)
-Web Bundled 509ms node_modules/expo-router/entry.js (1 module)
-Web Bundled 45ms node_modules/expo-router/entry.js (1 module)
+λ Bundled 56ms node_modules/expo-router/node/render.js (1 module)
+Web Bundled 448ms node_modules/expo-router/entry.js (1 module)
+Web Bundled 40ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+λ Bundled 61ms node_modules/expo-router/node/render.js (1 module)
+Web Bundled 485ms node_modules/expo-router/entry.js (1 module)
+Web Bundled 41ms node_modules/expo-router/entry.js (1 module)
  LOG  [web] Logs will appear in the browser console

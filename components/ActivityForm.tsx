@@ -11,7 +11,11 @@ import { Picker } from "@react-native-picker/picker";
 import { Activity } from "../types/Activity";
 import { useActivities } from "../context/ActivityContext";
 
-export const ActivityForm = () => {
+interface ActivityFormProps {
+  onClose: () => void;
+}
+
+export const ActivityForm: React.FC<ActivityFormProps> = ({ onClose }) => {
   const { addActivity } = useActivities();
   const [title, setTitle] = useState("");
   const [type, setType] = useState<Activity["type"]>("course");
@@ -24,15 +28,9 @@ export const ActivityForm = () => {
 
     try {
       await addActivity(title, type, duration, distance, calories);
-      // Reset form fields after successful submission
-      setTitle("");
-      setType("course");
-      setDuration("");
-      setDistance("");
-      setCalories("");
+      onClose(); // Close the modal on success
     } catch (error) {
       console.error("Failed to add activity:", error);
-      // Optionally, show an error message to the user
     }
   };
 
@@ -91,29 +89,28 @@ export const ActivityForm = () => {
         keyboardType="numeric"
         testID="calories-input"
       />
-      <TouchableOpacity
-        style={styles.buttonContainer}
-        onPress={handleSubmit}
-        testID="add-activity-button"
-      >
-        <Text style={styles.buttonText}>AJOUTER</Text>
-      </TouchableOpacity>
+      <View style={styles.buttonRow}>
+        <TouchableOpacity
+          style={[styles.buttonContainer, styles.cancelButton]}
+          onPress={onClose}
+        >
+          <Text style={[styles.buttonText, styles.cancelButtonText]}>ANNULER</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={handleSubmit}
+          testID="add-activity-button"
+        >
+          <Text style={styles.buttonText}>AJOUTER</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#1e1e1e",
-    padding: 20,
-    borderRadius: 10,
-    marginBottom: 20,
-    ...Platform.select({
-      web: {
-        width: "50%",
-        alignSelf: "center",
-      },
-    }),
+    backgroundColor: "transparent",
   },
   input: {
     height: 50,
@@ -146,16 +143,28 @@ const styles = StyleSheet.create({
     color: "#fff",
     backgroundColor: "#333",
   },
+  buttonRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 8,
+  },
   buttonContainer: {
     backgroundColor: "#ffd700",
     borderRadius: 8,
     paddingVertical: 16,
     alignItems: "center",
-    marginTop: 8,
+    flex: 1,
+  },
+  cancelButton: {
+    backgroundColor: "#333",
+    marginRight: 10,
   },
   buttonText: {
     color: "#111",
     fontSize: 16,
     fontWeight: "bold",
+  },
+  cancelButtonText: {
+    color: "#fff",
   },
 });

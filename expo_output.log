@@ -8,9 +8,10 @@ Your project may not work correctly until you install the expected versions of t
 Waiting on http://localhost:8081
 Logs for your project will appear below.
 Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓░░░ 86.3% (800/861)
-λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 99.8% (1125/1126)
-λ Bundled 3631ms node_modules/expo-router/node/render.js (1129 modules)
-Web Bundled 5023ms node_modules/expo-router/entry.js (861 modules)
-Web Bundled 1078ms node_modules/expo-router/entry.js (880 modules)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 89.6% (782/837)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 88.0% (833/926)
+λ Bundled 4106ms node_modules/expo-router/node/render.js (1063 modules)
+Web Bundled 5962ms node_modules/expo-router/entry.js (909 modules)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 89.9% (693/731)
+Web Bundled 1226ms node_modules/expo-router/entry.js (865 modules)
  LOG  [web] Logs will appear in the browser console

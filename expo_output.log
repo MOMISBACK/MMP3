@@ -1,0 +1,52 @@
+Starting project at /app
+React Compiler enabled
+Starting Metro Bundler
+The following packages should be updated for best compatibility with the installed expo version:
+  @react-native-picker/picker@2.11.4 - expected version: 2.11.1
+  expo@54.0.27 - expected version: ~54.0.29
+  expo-constants@18.0.11 - expected version: ~18.0.12
+  expo-router@6.0.17 - expected version: ~6.0.19
+Your project may not work correctly until you install the expected versions of the packages.
+Waiting on http://localhost:8081
+Logs for your project will appear below.
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓░░░░░░░░░░░ 36.0% ( 38/170)
+λ node_modules/expo-router/node/render.js ▓░░░░░░░░░░░░░░░  8.0% ( 48/206)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓░░░░░░░░░░░ 36.0% (162/320)
+λ node_modules/expo-router/node/render.js ▓▓▓▓░░░░░░░░░░░░ 27.7% (202/384)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓░░░░░░░░░░ 42.8% (335/512)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓░░░░░░ 65.3% (454/562)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓░░░░░░░ 61.7% (501/638)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓░░░░░ 70.3% (549/655)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 90.1% (824/877)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓░░░ 87.3% (818/899)
+Web Bundled 19944ms node_modules/expo-router/entry.js (908 modules)
+λ Bundled 20180ms node_modules/expo-router/node/render.js (1130 modules)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓░░░░░░░ 58.4% (451/614)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 95.6% (872/892)
+Web Bundled 7238ms node_modules/expo-router/entry.js (911 modules)
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+λ Bundled 50ms node_modules/expo-router/node/render.js (1 module)
+Web Bundled 587ms node_modules/expo-router/entry.js (1 module)
+Web Bundled 107ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+λ Bundled 43ms node_modules/expo-router/node/render.js (1 module)
+Web Bundled 452ms node_modules/expo-router/entry.js (1 module)
+Web Bundled 39ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+λ Bundled 43ms node_modules/expo-router/node/render.js (1 module)
+Web Bundled 427ms node_modules/expo-router/entry.js (1 module)
+Web Bundled 39ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+λ Bundled 31ms node_modules/expo-router/node/render.js (1 module)
+Web Bundled 372ms node_modules/expo-router/entry.js (1 module)
+Web Bundled 48ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+λ Bundled 45ms node_modules/expo-router/node/render.js (1 module)
+Web Bundled 450ms node_modules/expo-router/entry.js (1 module)
+Web Bundled 37ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console

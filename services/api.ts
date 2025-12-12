@@ -15,8 +15,8 @@ interface AuthResponse {
   token: string;
 }
 
-// Define the base URL for the API depending on the platform
-const API_URL = Platform.OS === 'android' ? 'http://10.0.2.2:3000/api' : 'http://localhost:3000/api';
+// Define the base URL for the API
+const API_URL = 'https://server-ls5m.onrender.com/api';
 
 // Create an Axios instance
 const api = axios.create({

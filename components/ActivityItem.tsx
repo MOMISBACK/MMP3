@@ -1,37 +1,67 @@
-import React from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
-import { Activity } from "../types/Activity";
 
-interface Props {
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Activity } from '../../types/Activity';
+import { Ionicons } from '@expo/vector-icons';
+
+interface ActivityItemProps {
   activity: Activity;
   onDelete: (id: string) => void;
 }
 
-export const ActivityItem: React.FC<Props> = ({ activity, onDelete }) => {
-  const formattedDate = new Date(activity.date).toLocaleString();
+const activityIcons: Record<Activity['type'], React.ComponentProps<typeof Ionicons>['name']> = {
+  course: 'walk',
+  velo: 'bicycle',
+  natation: 'water',
+  marche: 'walk-outline',
+};
+
+export const ActivityItem: React.FC<ActivityItemProps> = ({ activity, onDelete }) => {
   return (
-    <View style={styles.item}>
-      <Text style={styles.itemTitle}>{activity.title}</Text>
-      <Text>
-        {activity.type} - {activity.duration} min
-      </Text>
-      <Text style={styles.date}>{formattedDate}</Text>
-      <Button
-        title="Supprimer"
-        color="#E74C3C"
-        onPress={() => onDelete(activity.id)}
-      />
+    <View style={styles.container}>
+      <Ionicons name={activityIcons[activity.type]} size={24} color="#ffd700" style={styles.icon} />
+      <View style={styles.detailsContainer}>
+        <Text style={styles.title}>{activity.title}</Text>
+        <Text style={styles.details}>
+          {activity.duration} min
+          {activity.distance ? ` - ${activity.distance} km` : ''}
+          {activity.calories ? ` - ${activity.calories} kcal` : ''}
+        </Text>
+      </View>
+      <TouchableOpacity onPress={() => onDelete(activity.id)} style={styles.deleteButton}>
+        <Ionicons name="trash-outline" size={24} color="#ff6b6b" />
+      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  item: {
-    padding: 10,
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#1e1e1e',
+    padding: 15,
+    borderRadius: 8,
     marginBottom: 10,
-    backgroundColor: "#f1f1f1",
-    borderRadius: 5,
   },
-  itemTitle: { fontWeight: "bold" },
-  date: { fontSize: 12, color: "#999", marginTop: 4 },
+  icon: {
+    marginRight: 15,
+  },
+  detailsContainer: {
+    flex: 1,
+  },
+  title: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  details: {
+    color: '#aaa',
+    fontSize: 14,
+    marginTop: 4,
+  },
+  deleteButton: {
+    marginLeft: 10,
+    padding: 5,
+  },
 });

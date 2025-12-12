@@ -1,22 +1,39 @@
-import React from "react";
-import { FlatList, Text } from "react-native";
-import { useActivities } from "../context/ActivityContext";
-import { ActivityItem } from "./ActivityItem";
 
-export const ActivityList: React.FC = () => {
-  const { activities, removeActivity, loading } = useActivities();
+import React from 'react';
+import { FlatList, View, Text, StyleSheet } from 'react-native';
+import { Activity } from '../../types/Activity';
+import { ActivityItem } from './ActivityItem';
 
-  if (loading) {
-    return <Text>Chargement des activités...</Text>;
+interface ActivityListProps {
+  activities: Activity[];
+  onDelete: (id: string) => void;
+}
+
+export const ActivityList: React.FC<ActivityListProps> = ({ activities, onDelete }) => {
+  if (activities.length === 0) {
+    return (
+      <View style={styles.emptyContainer}>
+        <Text style={styles.emptyText}>Aucune activité à afficher.</Text>
+      </View>
+    );
   }
 
   return (
     <FlatList
       data={activities}
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => (
-        <ActivityItem activity={item} onDelete={removeActivity} />
-      )}
+      renderItem={({ item }) => <ActivityItem activity={item} onDelete={onDelete} />}
+      keyExtractor={item => item.id}
     />
   );
 };
+
+const styles = StyleSheet.create({
+  emptyContainer: {
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  emptyText: {
+    color: '#888',
+    fontSize: 16,
+  }
+});

@@ -33,27 +33,27 @@ export function ActivityProvider({ children }: { children: React.ReactNode }) {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { user } = useAuth(); // Get user from AuthContext
+  const { user, token } = useAuth(); // Get user and token from AuthContext
 
   const clearError = () => setError(null);
 
   const loadActivities = useCallback(async () => {
+    if (!token) {
+      setActivities([]);
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     try {
-      const token = await AsyncStorage.getItem("userToken");
-      if (token) {
-        const storedActivities = await activityService.getActivities(token);
-        setActivities(storedActivities);
-      } else {
-        setActivities([]); // Clear activities if no token
-      }
+      const storedActivities = await activityService.getActivities(token);
+      setActivities(storedActivities);
     } catch (error) {
       console.error("Failed to load activities", error);
       setActivities([]);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     if (user) {
@@ -80,10 +80,12 @@ export function ActivityProvider({ children }: { children: React.ReactNode }) {
       calories: calories ? Number(calories) : undefined,
     };
 
-    try {
-      const token = await AsyncStorage.getItem("userToken");
-      if (!token) throw new Error("No token found");
+    if (!token) {
+      setError("Vous devez être connecté pour ajouter une activité.");
+      return;
+    }
 
+    try {
       // Optimistic update
       const tempId = `temp-${Date.now()}`;
       const newActivity = { ...newActivityData, id: tempId, date: new Date().toISOString() };
@@ -107,10 +109,13 @@ export function ActivityProvider({ children }: { children: React.ReactNode }) {
     // Optimistic update
     setActivities(prev => prev.filter(a => a.id !== id && a._id !== id));
 
-    try {
-      const token = await AsyncStorage.getItem("userToken");
-      if (!token) throw new Error("No token found");
+    if (!token) {
+      setError("Vous devez être connecté pour supprimer une activité.");
+      setActivities(originalActivities); // Rollback
+      return;
+    }
 
+    try {
       await activityService.deleteActivity(id, token);
     } catch (error) {
       console.error("Failed to remove activity", error);

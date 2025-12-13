@@ -3,15 +3,31 @@ React Compiler enabled
 Starting Metro Bundler
 The following packages should be updated for best compatibility with the installed expo version:
   @react-native-picker/picker@2.11.4 - expected version: 2.11.1
+  expo@54.0.27 - expected version: ~54.0.29
+  expo-constants@18.0.11 - expected version: ~18.0.12
   expo-router@6.0.17 - expected version: ~6.0.19
 Your project may not work correctly until you install the expected versions of the packages.
 Waiting on http://localhost:8081
 Logs for your project will appear below.
 Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 89.6% (782/837)
-λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 88.0% (833/926)
-λ Bundled 4106ms node_modules/expo-router/node/render.js (1063 modules)
-Web Bundled 5962ms node_modules/expo-router/entry.js (909 modules)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 89.9% (693/731)
-Web Bundled 1226ms node_modules/expo-router/entry.js (865 modules)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 90.3% (838/882)
+λ node_modules/expo-router/node/render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 94.3% (1047/1078)
+λ Bundling failed 3523ms node_modules/expo-router/node/render.js (1078 modules)
+
+Metro error: SyntaxError: /app/context/ActivityContext.tsx: Missing catch or finally clause. (47:4)
+
+[0m [90m 45 |[39m     }
+ [90m 46 |[39m     setLoading([36mtrue[39m)[33m;[39m
+[31m[1m>[22m[39m[90m 47 |[39m     [36mtry[39m {
+ [90m    |[39m     [31m[1m^[22m[39m
+ [90m 48 |[39m       [36mconst[39m storedActivities [33m=[39m [36mawait[39m activityService[33m.[39mgetActivities(token)[33m;[39m
+ [90m 49 |[39m       setActivities(storedActivities)[33m;[39m
+ [90m 50 |[39m       } [36melse[39m {[0m
+
+Call Stack
+  <unknown> (context/ActivityContext.tsx:47:5)
+Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 90.3% (838/882)
+Web Bundling failed 4085ms node_modules/expo-router/entry.js (882 modules)
+Web node_modules/expo-router/_error.js ▓▓▓▓▓▓▓▓▓▓▓▓░░░░ 80.7% (248/276)
+Web Bundled 5878ms node_modules/expo-router/_error.js (323 modules)
  LOG  [web] Logs will appear in the browser console

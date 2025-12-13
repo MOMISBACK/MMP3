@@ -1,15 +1,21 @@
 
-import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Modal } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View, TouchableOpacity, Modal, Alert } from "react-native";
 import { ActivityForm } from "../../components/ActivityForm";
 import { ActivityList } from "../../components/ActivityList";
 import { useActivities } from "../../context/ActivityContext";
 import { useAuth } from "../../context/AuthContext";
 
 export default function HomeScreen() {
-  const { activities, removeActivity } = useActivities();
+  const { activities, removeActivity, error, clearError } = useActivities();
   const { user, logout } = useAuth();
   const [isFormVisible, setIsFormVisible] = useState(false);
+
+  useEffect(() => {
+    if (error) {
+      Alert.alert("Erreur", error, [{ text: "OK", onPress: clearError }]);
+    }
+  }, [error]);
 
   return (
     <View style={styles.container}>

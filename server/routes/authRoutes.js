@@ -49,10 +49,19 @@ router.post(
 // @route   POST /api/auth/login
 // @desc    Authenticate user & get token
 // @access  Public
-router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+router.post(
+  '/login',
+  body('email').isEmail().normalizeEmail(),
+  body('password').not().isEmpty(),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
-  try {
+    const { email, password } = req.body;
+
+    try {
     const user = await User.findOne({ email });
 
     if (user && (await user.matchPassword(password))) {

@@ -21,6 +21,8 @@ interface ActivityContextType {
   ) => Promise<void>;
   removeActivity: (id: string) => Promise<void>;
   loading: boolean;
+  error: string | null;
+  clearError: () => void;
 }
 
 const ActivityContext = createContext<ActivityContextType | undefined>(
@@ -30,7 +32,10 @@ const ActivityContext = createContext<ActivityContextType | undefined>(
 export function ActivityProvider({ children }: { children: React.ReactNode }) {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const { user } = useAuth(); // Get user from AuthContext
+
+  const clearError = () => setError(null);
 
   const loadActivities = useCallback(async () => {
     setLoading(true);
@@ -79,30 +84,45 @@ export function ActivityProvider({ children }: { children: React.ReactNode }) {
       const token = await AsyncStorage.getItem("userToken");
       if (!token) throw new Error("No token found");
 
-      await activityService.addActivity(newActivityData, token);
-      await loadActivities(); // Reload activities to get the latest list
+      // Optimistic update
+      const tempId = `temp-${Date.now()}`;
+      const newActivity = { ...newActivityData, id: tempId, date: new Date().toISOString() };
+      setActivities(prev => [newActivity, ...prev]);
+
+      const savedActivity = await activityService.addActivity(newActivityData, token);
+
+      // Replace temporary activity with the one from the server
+      setActivities(prev => prev.map(a => a.id === tempId ? savedActivity : a));
+
     } catch (error) {
       console.error("Failed to save activity", error);
-      // TODO: Implement user-facing error handling
+      setError("Impossible d'ajouter l'activité. Veuillez réessayer.");
+      // Rollback optimistic update
+      await loadActivities();
     }
   };
 
   const removeActivity = async (id: string) => {
+    const originalActivities = [...activities];
+    // Optimistic update
+    setActivities(prev => prev.filter(a => a.id !== id && a._id !== id));
+
     try {
       const token = await AsyncStorage.getItem("userToken");
       if (!token) throw new Error("No token found");
 
       await activityService.deleteActivity(id, token);
-      await loadActivities(); // Reload activities
     } catch (error) {
       console.error("Failed to remove activity", error);
-      // TODO: Implement user-facing error handling
+      setError("Impossible de supprimer l'activité. Veuillez réessayer.");
+      // Rollback
+      setActivities(originalActivities);
     }
   };
 
   return (
     <ActivityContext.Provider
-      value={{ activities, addActivity, removeActivity, loading }}
+      value={{ activities, addActivity, removeActivity, loading, error, clearError }}
     >
       {children}
     </ActivityContext.Provider>
